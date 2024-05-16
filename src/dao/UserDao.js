@@ -2,7 +2,7 @@ const SuperDao = require('./SuperDao');
 const models = require('../models');
 
 const User = models.User;
-
+const BookTransaction = models.BookTransaction;
 class UserDao extends SuperDao {
     constructor() {
         super(User);
@@ -16,6 +16,9 @@ class UserDao extends SuperDao {
             }
             return false;
         });
+    }
+    async getWithBookTransaction(){
+        
     }
 
     async createWithTransaction(user, transaction) {

@@ -42,13 +42,13 @@ class UserService {
      * @returns {Object}
      */
 
-    isEmailExists = async (email) => {
-        const message = 'Email found!';
-        if (!(await this.userDao.isNameExists(email))) {
-            return responseHandler.returnError(400, 'Email not Found!!');
-        }
-        return responseHandler.returnSuccess(200, message);
-    };
+    // isEmailExists = async (email) => {
+    //     const message = 'Email found!';
+    //     if (!(await this.userDao.isNameExists(email))) {
+    //         return responseHandler.returnError(400, 'Email not Found!!');
+    //     }
+    //     return responseHandler.returnSuccess(200, message);
+    // };
 
     getUserById = async (id) => {
         return this.userDao.findOneByWhere({ id });

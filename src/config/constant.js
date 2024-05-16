@@ -11,8 +11,13 @@ const verificationCodeConstant = {
     STATUS_NOT_USED: 0,
     STATUS_USED: 1,
 };
+const processType = {
+    BORROW: 1,
+    RETURN: 2
+};
 
 module.exports = {
     userConstant,
     verificationCodeConstant,
+    processType
 };

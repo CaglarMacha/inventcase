@@ -2,7 +2,6 @@ const SuperDao = require('./SuperDao');
 const models = require('../models');
 
 const Book = models.Book;
-
 class BookDao extends SuperDao {
     constructor() {
         super(Book);

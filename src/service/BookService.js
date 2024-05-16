@@ -56,7 +56,6 @@ class BookService {
         } catch (error) {
             
         }
-        
     }
 }
 
