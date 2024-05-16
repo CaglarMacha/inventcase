@@ -1,15 +1,15 @@
 const SuperDao = require('./SuperDao');
 const models = require('../models');
 
-const Book = models.book;
+const Book = models.Book;
 
-class UserDao extends SuperDao {
+class BookDao extends SuperDao {
     constructor() {
-        super(User);
+        super(Book);
     }
 
-    async isEmailExists(email) {
-        return User.count({ where: { email } }).then((count) => {
+    async isNameExists(name) {
+        return Book.count({ where: { name } }).then((count) => {
             if (count != 0) {
                 return true;
             }
@@ -17,9 +17,9 @@ class UserDao extends SuperDao {
         });
     }
 
-    async createWithTransaction(user, transaction) {
-        return User.create(user, { transaction });
+    async createWithTransaction(book, transaction) {
+        return Book.create(book, { transaction });
     }
 }
 
-module.exports = UserDao;
+module.exports = BookDao;

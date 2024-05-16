@@ -4,95 +4,60 @@ const { userConstant } = require('../config/constant');
 
 class BookService {
     constructor() {
-        this.userDao = new BookDao();
+        this.bookDao = new BookDao();
     }
 
     /**
-     * Create a user
-     * @param {Object} userBody
+     * 
+     * @param {Object} body
      * @returns {Object}
      */
-    createUser = async (userBody) => {
+    createBook= async (body) => {
         try {
-            if (await this.userDao.isNameExists(userBody.name)) {
+            if (await this.bookDao.isNameExists(body.name)) {
                 return responseHandler.returnError(400, 'Name already taken');
             }
-            userBody.status = userConstant.STATUS_ACTIVE;
+            body.status = userConstant.STATUS_ACTIVE;
 
-            let userData = await this.userDao.create(userBody);
+            let bookData = await this.bookDao.create(body);
             var message ="";
-            if (!userData) {
+            if (!bookData) {
                 message = 'Failed! Please Try again.';
                 new Error(message)
             }
           
-            userData = userData.toJSON();
-            delete userData.password;
+            bookData = bookData.toJSON();
+            delete bookData.password;
 
-            return responseHandler.returnSuccess(200, message, userData);
+            return responseHandler.returnSuccess(200, message, bookData);
         } catch (e) {
             console.log(e);
             return responseHandler.returnError(400, 'Something went wrong!');
         }
     };
 
-    /**
-     * Get user
-     * @param {String} email
-     * @returns {Object}
-     */
-
-    isEmailExists = async (email) => {
-        const message = 'Email found!';
-        if (!(await this.userDao.isNameExists(email))) {
-            return responseHandler.returnError(400, 'Email not Found!!');
+    getBookById = async (id) => {
+        try {
+            const message = 'E';
+            var it = parseInt(id);
+            var book = await this.bookDao.findById({ it });
+            return responseHandler.returnSuccess(200, message, book);
+        } catch (error) {
+            console.log(error);
         }
-        return responseHandler.returnSuccess(200, message);
+
     };
 
-    getUserByUuid = async (uuid) => {
-        return this.userDao.findOneByWhere({ uuid });
-    };
-
-    changePassword = async (data, uuid) => {
-        let message = 'Login Successful';
-        let statusCode = 200;
-        let user = await this.userDao.findOneByWhere({ uuid });
-
-        if (!user) {
-            return responseHandler.returnError(400, 'User Not found!');
+    getAllBook = async () => {
+        try {
+            var message ="";
+            var bookData =  await this.bookDao.findAll();
+            return responseHandler.returnSuccess(200, message, bookData);
+        } catch (error) {
+            
         }
-
-        if (data.password !== data.confirm_password) {
-            return responseHandler.returnError(
-                400,
-                'Confirm password not matched',
-            );
-        }
-
-        const isPasswordValid = await bcrypt.compare(data.old_password, user.password);
-        user = user.toJSON();
-        delete user.password;
-        if (!isPasswordValid) {
-            statusCode = 400;
-            message = 'Wrong old Password!';
-            return responseHandler.returnError(statusCode, message);
-        }
-        const updateUser = await this.userDao.updateWhere(
-            { password: bcrypt.hashSync(data.password, 8) },
-            { uuid },
-        );
-
-        if (updateUser) {
-            return responseHandler.returnSuccess(
-                200,
-                'Password updated Successfully!',
-                {},
-            );
-        }
-
-        return responseHandler.returnError(400, 'Password Update Failed!');
-    };
+        
+    }
 }
 
-module.exports = UserService;
+module.exports = BookService;

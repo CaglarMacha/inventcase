@@ -50,8 +50,8 @@ class UserService {
         return responseHandler.returnSuccess(200, message);
     };
 
-    getUserByUuid = async (uuid) => {
-        return this.userDao.findOneByWhere({ uuid });
+    getUserById = async (id) => {
+        return this.userDao.findOneByWhere({ id });
     };
 }
 

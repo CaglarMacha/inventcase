@@ -1,22 +1,16 @@
-// var express = require('express');
-// var router = express.Router();
-
-// /* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
-
-// module.exports = router;
 const express = require('express');
-const authRoute = require('./userRoute');
-
+const userRoute = require('./userRoute');
+const bookRoute = require('./bookRoute');
 const router = express.Router();
 
 const defaultRoutes = [
     {
         path: '/',
-        route: authRoute,
-    },
+        route: userRoute,
+    },{
+      path: '/',
+      route: bookRoute,
+  },
 ];
 
 defaultRoutes.forEach((route) => {

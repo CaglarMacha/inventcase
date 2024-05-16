@@ -17,7 +17,7 @@ class SuperDao {
     }
 
     async findById(id) {
-        return this.Model.findOne({ where: { id } })
+        return this.Model.findByPk(2)
             .then((result) => {
                 return result;
             })
