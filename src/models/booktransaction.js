@@ -4,6 +4,7 @@ const {
 } = require('sequelize');
 
 const User = require('./user');
+const Book = require('./book');
 module.exports = (sequelize, DataTypes) => {
   class BookTransaction extends Model {
     /**
@@ -46,6 +47,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'BookTransaction',
   });
-  BookTransaction.belongsTo(User);
+  BookTransaction.belongsTo(User, {foreignKey: 'userid' });
+  BookTransaction.belongsTo(Book, {foreignKey: 'bookid' });
   return BookTransaction;
 };
