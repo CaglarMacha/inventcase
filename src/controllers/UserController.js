@@ -21,6 +21,15 @@ class UserController {
             res.status(400).send(e);
         }
     };
+    getAllUsers = async (req, res) => {
+        try {
+            const users = await this.userService.getUsers();
+            res.send(users);
+        } catch (e) {
+            console.log(e);
+            res.status(400).send(e);
+        }
+    }
 }
 
 module.exports = UserController;

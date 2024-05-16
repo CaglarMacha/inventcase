@@ -53,6 +53,9 @@ class UserService {
     getUserById = async (id) => {
         return this.userDao.findOneByWhere({ id });
     };
+    getUsers = async () => {
+        return this.userDao.findAll();
+    }
 }
 
 module.exports = UserService;

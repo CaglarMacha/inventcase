@@ -4,8 +4,9 @@ const UserValidator = require('../validator/UserValidator');
 
 const router = express.Router();
 
-const authController = new UserController();
+const userController = new UserController();
 const userValidator = new UserValidator();
-router.post('/users', userValidator.userCreateValidator, authController.create);
-router.get('/users/:id', userValidator.userCreateValidator, authController.create);
+router.post('/users', userValidator.userCreateValidator, userController.create);
+router.get('/users/:id', userValidator.userCreateValidator, userController.create);
+router.get('/users', userController.getAllUsers);
 module.exports = router;
