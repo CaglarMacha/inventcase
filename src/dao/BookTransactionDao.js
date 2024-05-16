@@ -24,7 +24,7 @@ class BookTransactionDao extends SuperDao {
         });
     }
 
-    async createWithTransaction(book, transaction) {
+    async createeTransaction(book, transaction) {
         return BookTransaction.create(book, { transaction });
     }
 }

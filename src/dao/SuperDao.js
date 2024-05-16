@@ -17,7 +17,7 @@ class SuperDao {
     }
 
     async findById(id) {
-        return this.Model.findByPk(id)
+        return this.Model.findOne(id)
             .then((result) => {
                 return result;
             })
@@ -52,6 +52,33 @@ class SuperDao {
                 console.log(e);
             });
     }
+
+    async findAllByWhere(where, attributes = null, order = ['id', 'desc']) {
+        if (attributes == null) {
+            return this.Model.findAll({
+                where,
+                order: [order],
+            })
+                .then((result) => {
+                    return result;
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
+        return this.Model.findOne({
+            where,
+            attributes,
+            order: [order],
+        })
+            .then((result) => {
+                return result;
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }
+
 
     async updateWhere(data, where) {
         return this.Model.update(data, { where })

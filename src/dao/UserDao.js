@@ -17,6 +17,14 @@ class UserDao extends SuperDao {
             return false;
         });
     }
+    async isUserExists(id) {
+        return User.count({ where: { id } }).then((count) => {
+            if (count != 0) {
+                return true;
+            }
+            return false;
+        });
+    }
     async getWithBookTransaction(){
         
     }

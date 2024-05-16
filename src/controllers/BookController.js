@@ -20,7 +20,8 @@ class BookController {
     getAllBooks = async (req, res) => {
         try {
             const books = await this.bookService.getAllBook();
-            res.send(books);
+            const result = books.response.data.map(y => [{ id: y.id, name: y.name }]) 
+            res.send(result.reduce((acc, val) => acc.concat(val), [])); 
         } catch (e) {
             console.log(e);
             res.status(400).send(e);
@@ -29,8 +30,8 @@ class BookController {
 
     getBookById = async (req, res) => {
         try {
-            const books = await this.bookService.getBookById(req.params.id);
-            res.send(books);
+            const book = await this.bookService.getBookById(req.params.id);
+            res.send({ id: book.id, name: book.name, score: book.score }); //TODO:convert class
         } catch (e) {
             console.log(e);
             res.status(400).send(e);

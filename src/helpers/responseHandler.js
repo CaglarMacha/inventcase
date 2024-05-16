@@ -29,6 +29,7 @@ const returnSuccess = (statusCode, message, data = {}) => {
     };
 };
 
+
 module.exports = {
     logError,
     logErrorMiddleware,

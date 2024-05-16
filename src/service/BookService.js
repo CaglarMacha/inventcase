@@ -38,10 +38,7 @@ class BookService {
 
     getBookById = async (id) => {
         try {
-            const message = 'E';
-            var it = parseInt(id);
-            var book = await this.bookDao.findById({ it });
-            return responseHandler.returnSuccess(200, message, book);
+            return this.bookDao.findOneByWhere({ id });
         } catch (error) {
             console.log(error);
         }
@@ -53,6 +50,13 @@ class BookService {
             var message ="";
             var bookData =  await this.bookDao.findAll();
             return responseHandler.returnSuccess(200, message, bookData);
+        } catch (error) {
+            
+        }
+    }
+    updateBookById = async(id,score) =>{
+        try {
+            let existingTransactionData = await this.bookDao.updateWhere({ score: score }, { id: id })
         } catch (error) {
             
         }
